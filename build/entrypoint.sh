@@ -13,8 +13,12 @@ ts() {
 if [[ -f /configs/main.cf ]]; then
 	rm -rf /postfix_persist/configs >/dev/null 2>&1
 	cp -r /configs /postfix_persist/configs
-	postmap /postfix_persist/configs/sasl_passwd && rm -f /postfix_persist/configs/sasl_passwd
-	postmap /postfix_persist/configs/sender_relay && rm -f /postfix_persist/configs/sender_relay
+	if [[ -f /postfix_persist/configs/sasl_passwd ]]; then
+		postmap /postfix_persist/configs/sasl_passwd && rm -f /postfix_persist/configs/sasl_passwd
+	fi
+	if [[ -f /postfix_persist/configs/sender_relay ]]; then
+		postmap /postfix_persist/configs/sender_relay && rm -f /postfix_persist/configs/sender_relay
+	fi
 	chmod -R 644 /postfix_persist/configs
 	echo "Successfully applied configurations. You can now comment/disable the 'configs' line in the volumes section" | ts
 	NEW_CONFIGS_APPLIED="true"
