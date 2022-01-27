@@ -1,0 +1,18 @@
+version: '3'
+
+volumes:
+  postfix_persist:
+
+services:
+  postfix:
+    build: ./build
+    container_name: postfix
+    hostname: postfixserver
+    restart: always
+    environment:
+      ALLOW_ENABLED_CONFIGS: 'false' # SET THIS TO 'true' TO ALLOW CONTAINER TO RUN AFTER APPLYING CONFIGS
+    ports:
+        - "25:25"
+    volumes:
+      - postfix_persist:/postfix_persist
+      # - ./configs:/configs:ro
