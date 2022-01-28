@@ -1,11 +1,4 @@
-# See /usr/share/postfix/main.cf.dist for a commented, more complete version
-
 compatibility_level = 3.6
-
-# Debian specific:  Specifying a file name will cause the first
-# line of that file to be used as the name.  The Debian default
-# is /etc/mailname.
-#myorigin = /etc/mailname
 
 smtpd_banner = $myhostname ESMTP $mail_name (Debian/GNU)
 biff = no
@@ -41,9 +34,6 @@ inet_interfaces = all
 # sender-dependent sasl authentication
 smtp_sender_dependent_authentication = yes
 sender_dependent_relayhost_maps = lmdb:/etc/postfix/sender_relay
-
-# default relayhost setting
-relayhost = [smtp.gmail.com]:587
 
 # smtp authentication settings
 smtp_sasl_auth_enable = yes
